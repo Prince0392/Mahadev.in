@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>શુભ શ્રાવણ માસ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@700&display=swap');
+
+        body {
+            font-family: 'Noto Sans Gujarati', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(to bottom, #4a0e4a, #8e44ad, #d2b4de); /* Deep spiritual gradient */
+            color: #ffffff; /* White text for contrast */
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden; /* For fireworks */
+        }
+
+        /* Background texture (subtle religious pattern) */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/lined-paper.png'); /* A subtle pattern, you can replace with a religious motif if you have one */
+            opacity: 0.1;
+            z-index: -2;
+        }
+
+        .ad-space {
+            width: 100%;
+            max-width: 728px; /* Standard leaderboard ad size or similar */
+            height: 90px; /* Standard leaderboard ad height */
+            background-color: rgba(255, 255, 255, 0.05); /* Slightly more transparent */
+            margin: 10px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ccc;
+            font-size: 0.9em;
+            border: 1px dashed rgba(255, 255, 255, 0.1); /* Lighter border */
+            box-sizing: border-box;
+            z-index: 5; /* Ensure ad space is above everything */
+            overflow: hidden; /* To contain ad iframe */
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background for content */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 100%;
+            border: 3px solid #ffcc00; /* Golden border */
+            z-index: 1; /* Ensure container is above fireworks */
+            position: relative;
+            margin-top: 10px; /* Space for top ad */
+            margin-bottom: 10px; /* Space for bottom ad */
+        }
+
+        h1 {
+            color: #ffeb3b; /* Bright yellow for main heading */
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Space between text and emoji */
+        }
+
+        h2 {
+            color: #b3e5fc; /* Light blue for Har Har Mahadev */
+            margin-top: 5px;
+            margin-bottom: 25px;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Space between text and emoji */
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            border: 2px solid #ffd700; /* Gold border */
+            border-radius: 8px;
+            font-size: 1.1em;
+            box-sizing: border-box;
+            text-align: center;
+            color: #333;
+            background-color: #f0f0f0;
+        }
+
+        input[type="text"]::placeholder {
+            color: #888;
+        }
+
+        button {
+            background-color: #25d366; /* WhatsApp green */
+            color: white;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        button:hover {
+            background-color: #1da851;
+            transform: translateY(-2px);
+        }
+
+        button img {
+            margin-right: 10px;
+            width: 24px;
+            height: 24px;
+        }
+
+        .animated-message {
+            font-size: 3em;
+            color: #ffcc00; /* Golden yellow for animated message */
+            margin-top: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInRise 1.5s forwards;
+            font-weight: bold;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        @keyframes fadeInRise {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sender-name {
+            font-size: 1.8em;
+            color: #a7d9ff; /* Light blue for sender name */
+            margin-top: 15px;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 2s forwards 0.5s; /* Delay for sender name */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        /* --- Full-Screen Fireworks CSS --- */
+        .fireworks-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1; /* Behind content */
+        }
+
+        .firework-particle {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation-name: firework-burst;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards;
+            top: var(--y);
+            left: var(--x);
+        }
+
+        @keyframes firework-burst {
+            0% {
+                transform: translate(-50%, -50%) scale(0.2);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(var(--final-scale)); /* Use variable for dynamic scale */
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fireworks-wrapper" id="fireworks-container"></div>
+
+    <div class="ad-space" id="top-ad-space">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : 'baed54df6718feca85c82840ea97dd69',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/baed54df6718feca85c82840ea97dd69/invoke.js"></script>
+    </div>
+
+    <div class="container" id="main-content">
+        <h1>
+            <span class="emoji">🙏</span> શ્રાવણ માસ ની હાર્દિક શુભેચ્છાઓ તમને અને તમારા પરિવાર <span class="emoji">🕉️</span>
+        </h1>
+        <h2>
+            <span class="emoji">🔔</span> હર હર મહાદેવ <span class="emoji">🔱</span>
+        </h2>
+
+        <div class="input-box" id="name-input-section">
+            <input type="text" id="userName" placeholder="અહીં તમારું નામ દાખલ કરો">
+        </div>
+
+        <button onclick="shareOnWhatsApp()">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon">
+            વોટ્સએપ પર શેર કરો
+        </button>
+
+        <p class="footer-text">આપ સૌને શિવજીના આશીર્વાદ પ્રાપ્ત થાય! <span class="emoji">✨</span></p>
+    </div>
+
+    <div id="greeting-content" style="display: none;">
+        <p class="animated-message" id="animatedWish">
+            <span class="emoji">🌸</span> શ્રાવણ મહીના ની શુભકામનાઓ! <span class="emoji">🌿</span>
+        </p>
+        <p class="sender-name" id="senderDisplay"></p>
+        <div class="input-box" id="receiver-name-input-section" style="margin-top: 40px;">
+            <input type="text" id="receiverName" placeholder="અહીં તમારું નામ દાખલ કરો">
+        </div>
+        <button onclick="shareOnWhatsAppFromReceiver()">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon">
+            આ સંદેશ આગળ મોકલો
+        </button>
+    </div>
+
+    <div class="ad-space" id="bottom-ad-space">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : 'baed54df6718feca85c82840ea97dd69',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/baed54df6718feca85c82840ea97dd69/invoke.js"></script>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const sender = params.get('sender');
+
+            if (sender) {
+                document.getElementById('main-content').style.display = 'none';
+                document.getElementById('greeting-content').style.display = 'block';
+                document.getElementById('animatedWish').innerHTML = '<span class="emoji">🌸</span> શ્રાવણ મહીના ની શુભકામનાઓ! <span class="emoji">🌿</span>';
+                document.getElementById('senderDisplay').innerText = `(${sender} તરફથી)`;
+                
+                // Hide ad spaces when someone comes from a shared link
+                document.getElementById('top-ad-space').style.display = 'none';
+                document.getElementById('bottom-ad-space').style.display = 'none';
+
+            } else { // Only show fireworks on the initial page load if not from a shared link
+                startFireworks();
+            }
+        });
+
+        function shareOnWhatsApp() {
+            const userName = document.getElementById('userName').value;
+            let message = "શ્રાવણ માસ ની હાર્દિક શુભેચ્છાઓ તમને અને તમારા પરિવાર! હર હર મહાદેવ! 🙏🕉️🔔🔱";
+            if (userName) {
+                message = `${userName} તરફથી શ્રાવણ માસ ની હાર્દિક શુભેચ્છાઓ તમને અને તમારા પરિવાર! હર હર મહાદેવ! 🙏🕉️🔔🔱`;
+            }
+
+            const urlToShare = `${window.location.origin}${window.location.pathname}?sender=${encodeURIComponent(userName || 'એક ભક્ત')}`;
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + "\n\nઆ ખાસ સંદેશ જોવા માટે અહીં ક્લિક કરો: " + urlToShare)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function shareOnWhatsAppFromReceiver() {
+            const receiverName = document.getElementById('receiverName').value;
+            
+            let message = "શ્રાવણ માસ ની હાર્દિક શુભેચ્છાઓ તમને અને તમારા પરિવાર! હર હર મહાદેવ! 🙏🕉️🔔🔱";
+            if (receiverName) {
+                message = `${receiverName} તરફથી શ્રાવણ માસ ની હાર્દિક શુભેચ્છાઓ તમને અને તમારા પરિવાર! હર હર મહાદેવ! 🙏🕉️🔔🔱`;
+            }
+
+            const urlToShare = `${window.location.origin}${window.location.pathname}?sender=${encodeURIComponent(receiverName || 'એક ભક્ત')}`;
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + "\n\nઆ ખાસ સંદેશ જોવા માટે અહીં ક્લિક કરો: " + urlToShare)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // --- Full-Screen Fireworks JavaScript ---
+        function createFireworkBurst() {
+            const fireworksContainer = document.getElementById('fireworks-container');
+            if (!fireworksContainer) return;
+
+            const firework = document.createElement('div');
+            firework.classList.add('firework-particle');
+            
+            // Random position across the entire screen
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            firework.style.setProperty('--x', `${x}px`);
+            firework.style.setProperty('--y', `${y}px`);
+
+            // Increase size range for larger fireworks
+            const size = Math.random() * 15 + 8; // From 8px to 23px (previously 4px to 12px)
+            firework.style.width = `${size}px`;
+            firework.style.height = `${size}px`;
+
+            // Random color for particles
+            const colors = ['#FF4500', '#FFD700', '#ADFF2F', '#00BFFF', '#FF69B4', '#EE82EE', '#FFFF00', '#00FF00', '#00FFFF', '#FFA07A', '#9370DB']; // More colors
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            firework.style.backgroundColor = randomColor;
+            firework.style.setProperty('--final-scale', Math.random() * 2.5 + 2.5); // Increase final explosion scale (2.5 to 5.0)
+
+            // Random animation duration for staggered effect
+            const duration = Math.random() * 1.5 + 1; // 1 to 2.5 seconds
+            firework.style.animationDuration = `${duration}s`;
+
+            // Random delay for a more natural look
+            const delay = Math.random() * 0.5; // 0 to 0.5 seconds
+            firework.style.animationDelay = `${delay}s`;
+
+            fireworksContainer.appendChild(firework);
+
+            // Remove after animation completes to prevent clutter
+            firework.addEventListener('animationend', () => {
+                firework.remove();
+            });
+        }
+
+        function startFireworks() {
+            // Trigger fireworks even more frequently
+            setInterval(createFireworkBurst, 75); // Changed from 150ms to 75ms for significantly more fireworks
+        }
+    </script>
+</body>
+</html>
+<script async="async" data-cfasync="false" src="//pl27257842.profitableratecpm.com/1796d8e9be44f3825a33772960efa7d6/invoke.js"></script>
+<div id="container-1796d8e9be44f3825a33772960efa7d6"></div>
